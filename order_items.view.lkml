@@ -13,7 +13,9 @@ view: order_items {
   #   sql: ${created_date_date} || ${user_id} ;;
   # }
 
+
   dimension_group: created_date {
+
     type: time
     timeframes: [
       raw,
