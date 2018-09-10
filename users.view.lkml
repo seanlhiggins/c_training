@@ -19,6 +19,10 @@ view: users {
     style: integer
     }
 
+  dimension: isuserunder25
+  {type:yesno
+    sql: ${age} <35 };;
+    }
 
   dimension: city {
     type: string
