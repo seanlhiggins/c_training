@@ -123,11 +123,11 @@
     fields:
     - order_items.created_year
     - order_items.created_month_num
-    - order_items.total_revenue
+    - order_items.total_sale_price
     pivots:
     - order_items.created_year
     filters:
-      order_items.total_revenue: ">20000"
+      order_items.total_sale_price: ">20000"
       order_items.created_date: 48 months ago for 48 months
     sorts:
     - order_items.created_year desc
@@ -236,7 +236,7 @@
     fields:
     - order_items.created_date
     - products.category
-    - order_items.order_item_count
+    - order_items.count
     pivots:
     - products.category
     filters:
@@ -304,12 +304,12 @@
     type: table
     fields:
     - products.brand
-    - order_items.order_count
+    - order_items.count
     - products.count
     - order_items.average_spend_per_user
     filters: {}
     sorts:
-    - order_items.order_count desc
+    - order_items.count desc
     limit: 10
     column_limit: 50
     query_timezone: America/New_York
@@ -342,7 +342,7 @@
     filters:
       users.created_date: 90 days
     sorts:
-    - order_items.order_count desc
+    - order_items.count desc
     limit: 500
     column_limit: 50
     query_timezone: America/Los_Angeles
@@ -394,9 +394,9 @@
     type: looker_geo_coordinates
     fields:
     - users.zip
-    - order_items.order_count
+    - order_items.count
     sorts:
-    - order_items.order_count desc
+    - order_items.count desc
     limit: 1000
     query_timezone: America/New_York
     colors:
@@ -447,7 +447,7 @@
     type: looker_column
     fields:
     - order_items.created_week
-    - order_items.total_revenue
+    - order_items.total_sale_price
     - users.traffic_source
     pivots:
     - users.traffic_source
@@ -499,7 +499,7 @@
     explore: order_items
     type: single_value
     fields:
-    - order_items.order_count
+    - order_items.count
     filters:
       products.brand: ''
     limit: 500
