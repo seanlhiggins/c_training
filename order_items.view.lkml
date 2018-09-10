@@ -93,6 +93,10 @@ view: order_items {
   measure: count {
     type: count
     drill_fields: [detail*]
+    link: {
+      url: "/dashboards/8/State=f['users.state']"
+      label: "Users Dashboard"
+    }
   }
 
   # ----- Sets of fields for drilling ------
@@ -103,6 +107,7 @@ view: order_items {
       users.first_name,
       users.last_name,
       inventory_items.id,
+      users.state,
       inventory_items.product_name
     ]
   }

@@ -8,8 +8,27 @@ view: products {
   }
 
   dimension: brand {
-    type: string
-    sql: ${TABLE}.brand ;;
+    sql: TRIM(${TABLE}.brand) ;;
+
+    link: {
+      label: "Website"
+      url: "http://www.google.com/search?q={{ value | encode_uri }}+clothes&btnI"
+      icon_url: "http://www.google.com/s2/favicons?domain=www.{{ value | encode_uri }}.com"
+    }
+
+    link: {
+      label: "Facebook"
+      url: "http://www.google.com/search?q=site:facebook.com+{{ value | encode_uri }}+clothes&btnI"
+      icon_url: "https://upload.wikimedia.org/wikipedia/commons/c/c2/F_icon.svg"
+    }
+
+    link: {
+      label: "{{value}} Analytics Dashboard"
+      url: "/dashboards/8?Brand%20Name={{ value | encode_uri }}"
+      icon_url: "http://www.looker.com/favicon.ico"
+    }
+
+    drill_fields: [category]
   }
 
   dimension: category {
