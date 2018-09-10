@@ -36,6 +36,11 @@ explore: order_items {
     relationship: many_to_one
     sql_on: ${products.id} = ${inventory_items.product_id} ;;
   }
+  join: repeat_purchase_facts {
+    relationship: many_to_one
+    type: full_outer
+    sql_on: ${order_items.order_id} = ${repeat_purchase_facts.order_id} ;;
+  }
 }
 explore: events {
   description: "This is an expensive Explore, don't touch unless your name is Sean"

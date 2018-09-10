@@ -36,20 +36,6 @@ view: users {
     sql: DATEDIFF(day,${created_date},CURRENT_DATE) < 21 ;;
   }
 
-  dimension: age_tier {
-    label: "age classification"
-    type: tier
-    sql: ${age};;
-    tiers: [20, 40, 60, 80]
-    style: integer
-  }
-
-  dimension: is_user_under_35 {
-    label: "age classification"
-    type:  yesno
-    sql: ${age}<35 ;;
-
-  }
 
   dimension: city {
     type: string
