@@ -8,7 +8,9 @@ view: order_items {
   }
 
 
+
   dimension_group: created_date {
+
     type: time
     timeframes: [
       raw,
