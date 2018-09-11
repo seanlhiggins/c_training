@@ -100,19 +100,13 @@ view: order_items {
     }
   }
 
-  measure: total_orders_users_under_35 {
-    type: count
-    hidden: no
+
+  measure: total_salePrice_Under35 {
+    type: sum
     filters: {
       field: users.is_user_under_35
       value: "yes"
     }
-  }
-
-  measure: total_orders_per_user_under_35 {
-    type: number
-    sql: 1.0 * ${total_orders_users_under_35} / ${users.total_users_under_35} ;;
-    value_format_name: decimal_2
   }
 
   measure: total_revenue_for_users_under_35 {
@@ -292,6 +286,7 @@ view: order_items {
     sql: 1.0 * ${count_with_repeat_purchase_within_30d} / NULLIF(${count},0) ;;
     drill_fields: [products.brand, count, count_with_repeat_purchase_within_30d, 30_day_repeat_purchase_rate]
   }
+
 
 
 

@@ -1,6 +1,4 @@
-view: user_orders_facts {
-
-
+view: order_items_derived {
   derived_table: {
     sql: SELECT
         order_items.user_id  AS "order_items.user_id",
@@ -11,13 +9,7 @@ view: user_orders_facts {
       GROUP BY 1
       ORDER BY 2 DESC
        ;;
-      # persist_for: "12 hours"
-      sql_trigger_value: SELECT CURRENT_DATE ;;
-#       datagroup_trigger: cimpress_default_datagroup_trigger
   }
-
-
-
 
   measure: count {
     type: count
@@ -25,25 +17,23 @@ view: user_orders_facts {
   }
 
   dimension: order_items_user_id {
+    type: number
     primary_key: yes
     hidden: yes
-    type: number
     sql: ${TABLE}."order_items.user_id" ;;
   }
 
-  measure: lifetime_orders {
-    type: sum
+  dimension: order_items_count {
+    type: number
     sql: ${TABLE}."order_items.count" ;;
   }
 
   measure: average_lifetime_value {
-    value_format_name: usd
     type: average
     sql: ${TABLE}."order_items.total_sale_price" ;;
   }
 
   set: detail {
-    fields: [order_items_user_id, lifetime_orders, average_lifetime_value]
-
+    fields: [order_items_user_id, order_items_count, average_lifetime_value]
   }
 }

@@ -34,6 +34,8 @@ view: users {
     style: integer
   }
 
+
+
   dimension: is_user_under_35 {
     group_label: "Age Dimensions"
     type: yesno
@@ -80,6 +82,8 @@ view: users {
     type: string
     sql: ${TABLE}.email ;;
   }
+
+
 
   dimension: first_name {
     type: string
@@ -139,4 +143,5 @@ view: users {
     type: count
     drill_fields: [id, first_name, last_name, events.count, order_items.count]
   }
+
 }
