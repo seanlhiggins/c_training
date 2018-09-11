@@ -3,10 +3,15 @@ connection: "events_ecommerce"
 # include all the views
 include: "*.view"
 include: "business_pulse*.dashboard.lookml"
+
 datagroup: cimpress_training_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
+
+
+
+
 
 persist_with: cimpress_training_default_datagroup
 #####something
@@ -31,6 +36,14 @@ explore: order_items {
     relationship: many_to_one
     sql_on: ${order_items.user_id} = ${users.id} ;;
   }
+
+  join: user_orders_facts {
+    view_label: "Lifetime Orders"
+    type: left_outer
+    sql_on: ${order_items.user_id} = ${user_orders_facts.order_items_user_id} ;;
+    relationship: many_to_one
+  }
+
 
   join: products {
     relationship: many_to_one
