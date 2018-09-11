@@ -99,6 +99,20 @@ view: order_items {
     }
   }
 
+  measure: total_sale_price
+  {
+    type: sum
+    sql: ${sale_price} ;;
+  }
+
+  measure: total_salePrice_Under35 {
+    type: sum
+    filters: {
+      field: users.is_user_under35
+      value: "yes"
+    }
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [

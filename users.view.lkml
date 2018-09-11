@@ -8,9 +8,26 @@ view: users {
   }
 
   dimension: age {
+group_label: "age"
     type: number
     sql: ${TABLE}.age ;;
   }
+
+  dimension: age_tier {
+    group_label: "age"
+    type: tier
+    sql: ${age} ;;
+    tiers: [20,40,60,80]
+    style: integer
+  }
+
+  dimension: is_user_under35{
+    group_label: "age"
+    type: yesno
+    sql: ${age} < 35 ;;
+
+  }
+
 
   dimension: city {
     type: string
@@ -41,6 +58,8 @@ view: users {
     type: string
     sql: ${TABLE}.email ;;
   }
+
+
 
   dimension: first_name {
     type: string
