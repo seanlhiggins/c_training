@@ -61,12 +61,7 @@ explore: order_items {
     sql_on: ${order_items.order_id} = ${repeat_purchase_facts.order_id} ;;
   }
 
-  join: user_orders_facts {
-    view_label: "Lifetime Orders"
-    type: left_outer
-    sql_on: ${order_items.user_id} = ${user_orders_facts.order_items_user_id};;
-    relationship: many_to_one
-  }
+
 
 }
 
