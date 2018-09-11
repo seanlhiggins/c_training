@@ -1,4 +1,13 @@
 
+
+view: users_orders_facts {
+  sql_table_name: monthly_user_orders ;;
+}
+
+view: users_extended {
+  extends: [users]
+}
+
 view: users {
   sql_table_name: public.users ;;
 
@@ -119,6 +128,15 @@ view: users {
   measure: average_age {
     type: average
     sql: ${age} ;;
+  }
+
+  measure: total_users_under_35 {
+    type: count
+    hidden: yes
+    filters: {
+      field: is_user_under_35
+      value: "yes"
+    }
   }
 
   measure: count {
