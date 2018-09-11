@@ -110,16 +110,13 @@ view: order_items {
     }
   }
 
-
-
   measure: total_salePrice_Under35 {
     type: sum
     filters: {
-      field: users.is_user_under35
+      field: users.is_user_under_35
       value: "yes"
     }
   }
-
 
   measure: total_revenue_for_users_under_35 {
     description: "Total Revenue for users who are under 35, revenue is summed, no ex-vat filter"
