@@ -24,7 +24,7 @@ view: products {
 
     link: {
       label: "{{value}} Analytics Dashboard"
-      url: "/dashboards/256?Brand={{ value | encode_uri }}"
+      url: "/dashboards/1527?Brand={{ value | encode_uri }}&Date={{ _filters['order_items.created_date'] | url_encode }}"
       icon_url: "http://www.looker.com/favicon.ico"
     }
 
