@@ -115,7 +115,7 @@ view: order_items {
   measure: total_salePrice_Under35 {
     type: sum
     filters: {
-      field: users.is_user_under35
+      field: users.is_user_under_35
       value: "yes"
     }
   }
