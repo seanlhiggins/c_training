@@ -32,6 +32,12 @@ explore: order_items {
     sql_on: ${order_items.user_id} = ${users.id} ;;
   }
 
+join: order_items_derived {
+  view_label: "Lifetime Orders"
+  type:  left_outer
+  sql_on:  ${order_items.user_id}=${order_items_derived.order_items_user_id};;
+  relationship: one_to_one
+}
   join: products {
     relationship: many_to_one
     sql_on: ${products.id} = ${inventory_items.product_id} ;;

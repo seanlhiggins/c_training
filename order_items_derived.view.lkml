@@ -30,6 +30,7 @@ view: order_items_derived {
 
   measure: average_lifetime_value {
     type: average
+    value_format_name: usd
     sql: ${TABLE}."order_items.total_sale_price" ;;
   }
 
