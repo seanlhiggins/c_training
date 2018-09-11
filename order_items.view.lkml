@@ -102,6 +102,21 @@ view: order_items {
     }
   }
 
+  measure: count_distinct {
+    type: count_distinct
+    sql: ${id} ;;
+  }
+
+  measure: total_revenue_for_users_under_35 {
+    type: sum
+    sql: ${sale_price}  ;;
+    filters: {
+      field: users.is_user_under_35
+      value: "yes"
+    }
+  }
+
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
