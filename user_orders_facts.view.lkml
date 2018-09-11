@@ -13,6 +13,7 @@ view: user_orders_facts {
        ;;
       # persist_for: "12 hours"
       sql_trigger_value: SELECT CURRENT_DATE ;;
+      distribution_style: all
 #       datagroup_trigger: cimpress_default_datagroup_trigger
   }
 
