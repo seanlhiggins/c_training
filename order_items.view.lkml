@@ -15,17 +15,7 @@ view: order_items {
 
 
   dimension_group: created {
-
     type: time
-    timeframes: [
-      raw,
-      time,time_of_day, hour_of_day,
-      date,day_of_week,
-      week,week_of_year,
-      month,month_name,
-      quarter,
-      year
-    ]
     sql: ${TABLE}.created_at ;;
   }
 
@@ -110,6 +100,14 @@ view: order_items {
     }
   }
 
+
+  measure: total_salePrice_Under35 {
+    type: sum
+    filters: {
+      field: users.is_user_under_35
+      value: "yes"
+    }
+  }
 
   measure: total_revenue_for_users_under_35 {
     description: "Total Revenue for users who are under 35, revenue is summed, no ex-vat filter"
@@ -288,6 +286,7 @@ view: order_items {
     sql: 1.0 * ${count_with_repeat_purchase_within_30d} / NULLIF(${count},0) ;;
     drill_fields: [products.brand, count, count_with_repeat_purchase_within_30d, 30_day_repeat_purchase_rate]
   }
+
 
 
 

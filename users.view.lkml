@@ -1,4 +1,13 @@
 
+
+view: users_orders_facts {
+  sql_table_name: monthly_user_orders ;;
+}
+
+view: users_extended {
+  extends: [users]
+}
+
 view: users {
   sql_table_name: public.users ;;
 
@@ -24,6 +33,8 @@ view: users {
     tiers: [20,40,60,80]
     style: integer
   }
+
+
 
   dimension: is_user_under_35 {
     group_label: "Age Dimensions"
@@ -84,6 +95,8 @@ view: users {
     sql: ${TABLE}.email ;;
   }
 
+
+
   dimension: first_name {
     type: string
     sql: ${TABLE}.first_name ;;
@@ -129,8 +142,18 @@ view: users {
     sql: ${age} ;;
   }
 
+  measure: total_users_under_35 {
+    type: count
+    hidden: yes
+    filters: {
+      field: is_user_under_35
+      value: "yes"
+    }
+  }
+
   measure: count {
     type: count
     drill_fields: [id, first_name, last_name, events.count, order_items.count]
   }
+
 }

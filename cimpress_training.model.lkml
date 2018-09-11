@@ -3,19 +3,30 @@ connection: "events_ecommerce"
 # include all the views
 include: "*.view"
 include: "business_pulse*.dashboard.lookml"
+
 datagroup: cimpress_training_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
+  sql_trigger: SELECT MAX(id) FROM cimpress_etl_logs;;
+  max_cache_age: "24 hours"
 }
 
-persist_with: cimpress_training_default_datagroup
-#####something
+#
+# datagroup: cimpress_events_real_time {
+#   max_cache_age: "0 hours"
+# }
+#
+#
+# persist_with: cimpress_training_default_datagroup
+# #####something
+#
+
 
 explore: distribution_centers {}
 
 explore: etl_jobs {}
 
+
 explore: order_items {
+  persist_for: "0 hours"
   label: "(1) Orders, Items and Users"
   view_name: order_items
   # sql_always_where: ${created_week} = TO_CHAR(DATE_TRUNC('week', DATE_ADD('day',-{{order_items.week_selector._parameter_value}},CURRENT_DATE)),'YYYY-MM-DD') ;;
@@ -32,6 +43,15 @@ explore: order_items {
     sql_on: ${order_items.user_id} = ${users.id} ;;
   }
 
+
+
+  join: user_orders_facts {
+    view_label: "Lifetime Orders"
+    type: left_outer
+    sql_on: ${users.id} = ${user_orders_facts.order_items_user_id} ;;
+    relationship: one_to_one
+  }
+
   join: products {
     relationship: many_to_one
     sql_on: ${products.id} = ${inventory_items.product_id} ;;
@@ -41,7 +61,13 @@ explore: order_items {
     type: full_outer
     sql_on: ${order_items.order_id} = ${repeat_purchase_facts.order_id} ;;
   }
+
+
+
 }
+
+
+
 explore: events {
   description: "This is an expensive Explore, don't touch unless your name is Sean"
   join: users {
